@@ -23,19 +23,19 @@
      <%  data1 << "ゴーヤ長さ：#{record["length"]}　重さ：#{record["weight"]} ゴーヤの質：#{record["quality"]} 売った相手:#{record["give_for"]} ゴーヤの売買日:#{record["date"]}" %>
    <% end %>
 
-   <form action="goya_one.cgi" method="POST">
+   <form action="goya.cgi" method="POST">
    press the button below, you will be taken to the bitter gourd trading information page other than self-consumption<br><br>
       <!-- valueには、送りたいデータを代入する -->
       <!-- name="goya"を、情報の目印とする -->
-     <input type="text" name="goya_one" value="<%= data.join(' ') %>">
+     <input type="text" name="goya" value="<%= data.join(' ') %>">
      <input type="submit" name="送信" >
    </form>
 
-   <form action="goya_two.cgi" method="POST">
+   <form action="goya.cgi" method="POST">
      Press the button below to jump to the bad quality bitter gourd information page<br><br>
      <!-- valueには、送りたいデータを代入する -->
      <!-- name="goya"を、情報の目印とする -->
-    <input type="text" name="goya_two" value="<%= data1.join(' ') %>">
+    <input type="text" name="goya" value="<%= data1.join(' ') %>">
     <input type="submit" name="送信" >
    </form>
  </body>
