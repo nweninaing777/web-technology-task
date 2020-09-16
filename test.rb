@@ -10,5 +10,5 @@ server = WEBrick::HTTPServer.new({
 }
 server.mount('/', WEBrick::HTTPServlet::ERBHandler, 'task.html.erb')
 server.mount('/goya.cgi', WEBrick::HTTPServlet::CGIHandler, 'goya.rb')
-
+server.mount('/goya_false.cgi', WEBrick::HTTPServlet::CGIHandler, 'goya_false.rb')
 server.start
