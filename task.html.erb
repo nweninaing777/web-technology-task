@@ -12,29 +12,28 @@
    <% connection.internal_encoding = "UTF-8" %>
 
 
-
-   <% result = connection.exec("select weight, give_for from crops;") %>
+   <% result = connection.exec("SELECT * FROM  crops WHERE give_for != '自家消費';") %>
    <% data = [] %>
-   <% result.each do |record| %>
-     <%  data << "ゴーヤの長さ：#{record["length"]}　重さ：#{record["weight"]} ゴーヤの質：#{record["quality"]} 売った相手:#{record["give_for"]} 売買日:#{record["date"]}" %>
-   <% end %>
-   
-  <% result1 = connection.exec("SELECT * FROM crops WHERE quality = false;") %>
-  <% data1 = [] %>
-  <% result1.each do |record| %>
-    <%  data1 << "ゴーヤ長さ：#{record["length"]}　重さ：#{record["weight"]} ゴーヤの質：#{record["quality"]} 売った相手:#{record["give_for"]} ゴーヤの売買日:#{record["date"]}" %>
-  <% end %>
+    <% result.each do |record| %>
+    <% data<< "ゴーヤの大きさ：#{record["weight"]}　売った相手：#{record["give_for"]}" %>
+     <% end %>
+
+
+      <% result1 = connection.exec("SELECT * FROM crops WHERE quality = false;") %>
+      <% data1 = [] %>
+      <% result1.each do |record| %>
+        <%  data1 << "ゴーヤ長さ：#{record["length"]}　重さ：#{record["weight"]} ゴーヤの質：#{record["quality"]} 売った相手:#{record["give_for"]} ゴーヤの売買日:#{record["date"]}" %>
+      <% end %>
 
    <form action="goya.cgi" method="POST">
-   press the button below, you will be taken to the bitter gourd trading information page other than self-consumption<br><br>
-      <!-- valueには、送りたいデータを代入する -->
+  下記のボタンを押すと、自家消費以外のゴーヤ売買情報ページに飛びます<br><br>
       <!-- name="goya"を、情報の目印とする -->
      <input type="text" name="goya" value="<%= data.join(' ') %>">
      <input type="submit" name="送信" >
    </form>
 
    <form action="goya_false.cgi" method="POST">
-     Press the button below to jump to the bad quality bitter gourd information page<br><br>
+    下記のボタンを押すと、悪品質なゴーヤの情報ページに飛びます<br><br>
      <!-- valueには、送りたいデータを代入する -->
      <!-- name="goya"を、情報の目印とする -->
     <input type="text" name="goya_false" value="<%= data1.join(' ') %>">
